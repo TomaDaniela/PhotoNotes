@@ -63,9 +63,11 @@ namespace PhotoNotes2
 
 
             albumStackPanel.Children.Add(img);
+            
             ok = ok + 150;
             i++;
-            if (i > 5)
+            double max = albumStackPanel.ActualWidth / (img.Width + i*10);
+            if (i > max)
             {
                 ok2 = ok2 + 120;
                 ok = 0;
