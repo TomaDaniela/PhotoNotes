@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,24 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PhotoNotes2
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PhotosWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PhotosWindow : Window
     {
         int ok = 0;
         int ok2 = 0;
         int i = 0;
 
-        public MainWindow()
+        public PhotosWindow()
         {
             InitializeComponent();
-  
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -46,49 +45,40 @@ namespace PhotoNotes2
                 albumScrollViewer.SetValue(Grid.ColumnSpanProperty, 2);
 
             }
-                
+
         }
 
-        private void AddAlbumButton_Click(object sender, RoutedEventArgs e)
+        private void AddPhotoButton_Click(object sender, RoutedEventArgs e)
         {
-          
-            Image img = new Image();
-            Button alb = new Button();
-            alb.Width = 100;
-            alb.Height = 100;
-            alb.Margin = new Thickness(20 + ok, 20 + ok2, 0, 0);
-
-            var uri = new Uri(uriString: @"E:\FACULTATE\An III\TP\PhotoNotes2\album3.png");
-            img.Source = new BitmapImage(uri);
-
-            alb.Content = img;
+            Image a = new Image();
+            a.Height = 200;
+            a.Width = 200;
+            Thickness thickness1 = new Thickness(10 + ok, 20 + ok2, 0, 0);
+            a.Margin = thickness1;
 
 
-
-            albumStackPanel.Children.Add(alb);
-            alb.Click += new RoutedEventHandler(alb_Click);
-            
-
-            ok = ok + 150;
-            i++;
-            double max = albumStackPanel.ActualWidth / (alb.Width + i*10);
-           
-            if (i > max)
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (.jpg;.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (.png)|.png";
+            if (op.ShowDialog() == true)
             {
-                ok2 = ok2 + 120;
+
+                a.Source = new BitmapImage(new Uri(op.FileName));
+                i++;
+            }
+
+
+            albumStackPanel.Children.Add(a);
+            ok = ok + 220;
+            if (i > 3)
+            {
+                ok2 = ok2 + 220;
                 ok = 0;
                 i = 0;
             }
 
-
-        }
-
-        private void alb_Click(object sender, RoutedEventArgs e)
-        {
-            PhotosWindow window = new PhotosWindow();
-            window.Show();
-            this.Close();
         }
     }
-
 }
