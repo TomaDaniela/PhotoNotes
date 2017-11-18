@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PhotoNotes2
+namespace PhotoNotes
 {
     /// <summary>
     /// Interaction logic for PhotosWindow.xaml
@@ -23,6 +23,8 @@ namespace PhotoNotes2
         int ok = 0;
         int ok2 = 0;
         int i = 0;
+
+        List<Image> imageList = new List<Image>();
 
         public PhotosWindow()
         {
@@ -66,11 +68,12 @@ namespace PhotoNotes2
             {
 
                 a.Source = new BitmapImage(new Uri(op.FileName));
+                imageList.Add(a);
                 i++;
             }
 
 
-            albumStackPanel.Children.Add(a);
+            albumStackPanel.Children.Add(imageList.ElementAt(imageList.Count-1));
             ok = ok + 220;
             if (i > 3)
             {
@@ -79,6 +82,13 @@ namespace PhotoNotes2
                 i = 0;
             }
 
+        }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
         }
     }
 }

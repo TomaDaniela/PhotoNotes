@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ControllerNamespace;
 
-namespace PhotoNotes2
+namespace PhotoNotes
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,10 +25,12 @@ namespace PhotoNotes2
         int ok2 = 0;
         int i = 0;
 
+        List<Button> albumList = new List<Button>();
+
         public MainWindow()
         {
             InitializeComponent();
-  
+
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -46,12 +49,14 @@ namespace PhotoNotes2
                 albumScrollViewer.SetValue(Grid.ColumnSpanProperty, 2);
 
             }
-                
+
         }
 
         private void AddAlbumButton_Click(object sender, RoutedEventArgs e)
         {
-          
+            //Controller controller = new Controller();
+
+
             Image img = new Image();
             Button alb = new Button();
             alb.Width = 100;
@@ -62,17 +67,16 @@ namespace PhotoNotes2
             img.Source = new BitmapImage(uri);
 
             alb.Content = img;
+            albumList.Add(alb);
 
 
-
-            albumStackPanel.Children.Add(alb);
+            albumCanvas.Children.Add(albumList.ElementAt(albumList.Count-1));
             alb.Click += new RoutedEventHandler(alb_Click);
-            
 
             ok = ok + 150;
             i++;
-            double max = albumStackPanel.ActualWidth / (alb.Width + i*10);
-           
+            double max = albumCanvas.ActualWidth / (alb.Width + i * 10);
+
             if (i > max)
             {
                 ok2 = ok2 + 120;
@@ -89,6 +93,13 @@ namespace PhotoNotes2
             window.Show();
             this.Close();
         }
-    }
 
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            menuGrid.Visibility = Visibility.Collapsed;
+            albumScrollViewer.SetValue(Grid.ColumnProperty, 0);
+            albumScrollViewer.SetValue(Grid.ColumnSpanProperty, 2);
+        }
+    }
 }
+
