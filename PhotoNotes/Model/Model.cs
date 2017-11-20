@@ -9,9 +9,12 @@ namespace ModelNamespace
 {
     public class Model
     {
-        public void addButton_Click()
+       public MessageBoxResult result;
+     public  void addButtonClick()
         {
-            MessageBoxResult result = MessageBox.Show("Result","Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            result = MessageBox.Show("Message", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
         }
     }
+
+    
 }

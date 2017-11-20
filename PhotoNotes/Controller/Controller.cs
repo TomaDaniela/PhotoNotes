@@ -9,11 +9,13 @@ namespace ControllerNamespace
 {
     public class Controller
     {
-        public Controller()
+        public Model model;
+     public   Controller()
         {
-            Model model = new Model();
-            model.addButton_Click();
+            model = new Model();
+            model.addButtonClick();
         }
+           
         
     }
 }

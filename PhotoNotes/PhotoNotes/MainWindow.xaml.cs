@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ControllerNamespace;
+using Microsoft.Win32;
 
 namespace PhotoNotes
 {
@@ -23,8 +24,8 @@ namespace PhotoNotes
     {
         int ok = 0;
         int ok2 = 0;
+        public Controller controller;
         int i = 0;
-
         List<Button> albumList = new List<Button>();
 
         public MainWindow()
@@ -63,14 +64,14 @@ namespace PhotoNotes
             alb.Height = 100;
             alb.Margin = new Thickness(20 + ok, 20 + ok2, 0, 0);
 
-            var uri = new Uri(uriString: @"E:\FACULTATE\An III\TP\PhotoNotes2\album3.png");
+            var uri = new Uri(uriString: @"D:\ProiectTP\PhotoNotes\PhotoNotes\Pictures\album3.png");
             img.Source = new BitmapImage(uri);
 
             alb.Content = img;
             albumList.Add(alb);
 
 
-            albumCanvas.Children.Add(albumList.ElementAt(albumList.Count-1));
+            albumCanvas.Children.Add(albumList.ElementAt(albumList.Count - 1));
             alb.Click += new RoutedEventHandler(alb_Click);
 
             ok = ok + 150;
@@ -102,4 +103,7 @@ namespace PhotoNotes
         }
     }
 }
+
+
+    
 

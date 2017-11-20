@@ -24,12 +24,13 @@ namespace PhotoNotes
         int ok2 = 0;
         int i = 0;
 
-        List<Image> imageList = new List<Image>();
-
         public PhotosWindow()
         {
             InitializeComponent();
         }
+        List<Image> imageList = new List<Image>();
+
+      
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
@@ -73,7 +74,7 @@ namespace PhotoNotes
             }
 
 
-            albumStackPanel.Children.Add(imageList.ElementAt(imageList.Count-1));
+            albumStackPanel.Children.Add(imageList.ElementAt(imageList.Count - 1));
             ok = ok + 220;
             if (i > 3)
             {
@@ -84,11 +85,21 @@ namespace PhotoNotes
 
         }
 
+      
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow window = new MainWindow();
             window.Show();
             this.Close();
         }
+
+        private void GoToNotesButton_Click(object sender, RoutedEventArgs e)
+        {
+            AccessPhotoNotesWindow window = new AccessPhotoNotesWindow();
+            window.Show();
+            this.Close();
+        }
+
+
     }
 }
