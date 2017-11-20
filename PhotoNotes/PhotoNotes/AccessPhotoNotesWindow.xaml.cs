@@ -22,10 +22,13 @@ namespace PhotoNotes
         int ok = 0;
         int ok2 = 0;
         int i = 0;
+     
 
         public AccessPhotoNotesWindow()
         {
             InitializeComponent();
+
+
         }
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
@@ -81,5 +84,18 @@ namespace PhotoNotes
             window.Show();
             this.Close();
         }
+        private void AspectRatioCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (myImage.Stretch == Stretch.Fill)
+            {
+                myImage.Stretch = Stretch.Uniform;
+
+            }
+            else if (myImage.Stretch == Stretch.Uniform)
+            {
+                myImage.Stretch = Stretch.Fill;
+            }
+        }
     }
+
 }

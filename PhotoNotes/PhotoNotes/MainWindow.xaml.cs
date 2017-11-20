@@ -27,10 +27,12 @@ namespace PhotoNotes
         public Controller controller;
         int i = 0;
         List<Button> albumList = new List<Button>();
-
+        private static readonly log4net.ILog log =
+         log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public MainWindow()
         {
             InitializeComponent();
+            log.Info("Application is working");
 
         }
 
@@ -56,35 +58,41 @@ namespace PhotoNotes
         private void AddAlbumButton_Click(object sender, RoutedEventArgs e)
         {
             //Controller controller = new Controller();
-
-
-            Image img = new Image();
-            Button alb = new Button();
-            alb.Width = 100;
-            alb.Height = 100;
-            alb.Margin = new Thickness(20 + ok, 20 + ok2, 0, 0);
-
-            var uri = new Uri(uriString: @"D:\ProiectTP\PhotoNotes\PhotoNotes\Pictures\album3.png");
-            img.Source = new BitmapImage(uri);
-
-            alb.Content = img;
-            albumList.Add(alb);
-
-
-            albumCanvas.Children.Add(albumList.ElementAt(albumList.Count - 1));
-            alb.Click += new RoutedEventHandler(alb_Click);
-
-            ok = ok + 150;
-            i++;
-            double max = albumCanvas.ActualWidth / (alb.Width + i * 10);
-
-            if (i > max)
+            try
             {
-                ok2 = ok2 + 120;
-                ok = 0;
-                i = 0;
-            }
+                Image img = new Image();
+                Button alb = new Button();
+                alb.Width = 100;
+                alb.Height = 100;
+                alb.Margin = new Thickness(20 + ok, 20 + ok2, 0, 0);
 
+                var uri = new Uri(uriString: @"D:\ProiectTP\PhotoNotes\PhotoNotes\Pctures\album3.png");
+                img.Source = new BitmapImage(uri);
+
+                alb.Content = img;
+                albumList.Add(alb);
+
+
+                albumCanvas.Children.Add(albumList.ElementAt(albumList.Count - 1));
+                alb.Click += new RoutedEventHandler(alb_Click);
+
+                ok = ok + 150;
+                i++;
+                double max = albumCanvas.ActualWidth / (alb.Width + i * 10);
+
+                if (i > max)
+                {
+                    ok2 = ok2 + 120;
+                    ok = 0;
+                    i = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                System.Windows.MessageBox.Show(ex.ToString(), "Message");
+
+            }
 
         }
 
